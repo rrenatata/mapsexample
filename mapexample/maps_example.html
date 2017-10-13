@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<body>
+<style>
+h1 {
+	color: red;
+	font-size: 30px;
+}
+</style>
+
+<h1>My First Google Map</h1>
+
+<div id="googleMap" style="width:100%;height:400px;"></div>
+
+<script>
+function myMap() {
+//latitude and longitude of where the map is centered 
+//how zoomed in the map is 
+//MapProp is a dictionary similar to how your css styles worked 
+//west and south have a negative number
+var mapCenter = new google.maps.LatLng(34.115868,-118.150309);
+var mapProp= {
+    center:mapCenter,
+    zoom:5,
+};
+var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+var bay = new google.maps.LatLng(13.948236,87.1431900);
+var capital = new google.maps.LatLng(46.946228,7.444995);
+var isthmus = new google.maps.LatLng(9.002049,-79.524558);
+var volcano = new google.maps.LatLng(63.6847464,-19.6677727);
+
+//add some markers to the map for each spot 
+//step1: create the marker with a descriptive var name
+//the position is the LatLng object you created earlier
+var bayMarker = new google.maps.Marker({position: bay});
+//step 2: add it to the map
+bayMarker.setMap(map);
+
+var capitalMarker = new google.maps.Marker({position: capital});
+capitalMarker.setMap(map);
+
+var isthmusMarker = new google.maps.Marker({position: isthmus, icon:'dino.png'});
+isthmusMarker.setMap(map);
+
+var volcanoMarker = new google.maps.Marker({position: volcano});
+volcanoMarker.setMap(map);
+
+//example of a polyline
+
+var myTrip = [bay,capital,volcano, isthmus];
+var flightPath = new google.maps.Polyline({
+	path:myTrip,
+	strokeColor:"#000000", 
+	strokeOpacity:0.8,
+	strokeWeight:2
+});
+//dont forget to add to map
+flightPath.setMap(map);
+
+}
+
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?callback=myMap"></script>
+
+</body>
+</html>
